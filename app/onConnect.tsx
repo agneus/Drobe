@@ -6,9 +6,8 @@ export default function OnConnect() {
 
   useEffect(() => {
     console.log("onConnect route hit");
-    // Handle the wallet connection here or redirect elsewhere
-    router.push("/"); // Redirect to the home page or another valid route
+    router.push("/");
   }, []);
 
-  return null; // No UI is needed for this route
+  return null;
 }
