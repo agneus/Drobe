@@ -4,33 +4,45 @@
     "slug": "Drobe",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/favicon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.agneus.Drobe"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/favicon.png",
+        "backgroundColor": "#18191A"
+      },
+      "package": "com.agneus.Drobe"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "walletAdapterUrl": "https://phantom.app/ul/",
+      "solanaCluster": "https://api.devnet.solana.com",
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "1c130a99-f853-439d-a66e-3c4452327375"
+      }
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/favicon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#18191A"
         }
       ]
     ],

@@ -9,7 +9,9 @@ dist/
 web-build/
 expo-env.d.ts
 
-# Native
+# Native builds
+ios/
+android/
 *.orig.*
 *.jks
 *.p8
@@ -17,22 +19,38 @@ expo-env.d.ts
 *.key
 *.mobileprovision
 
-# Metro
+# Metro bundler
 .metro-health-check*
 
-# debug
+# Debug files
 npm-debug.*
 yarn-debug.*
-yarn-error.*
+yarn-error.log
+*.log
 
 # macOS
 .DS_Store
 *.pem
 
-# local env files
+# Local environment files
 .env*.local
+.env
+.env.*
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 
+# Temporary files
+*.tmp
+*.temp
+
+# Editor/IDE-specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Miscellaneous
+*.lock
 app-example
+
