@@ -1,8 +1,17 @@
 import { View, Text, Button, StyleSheet } from "react-native";
 import { useWallet } from "@/context/WalletContext";
+import { useEffect } from "react";
+import { useRouter } from "expo-router";
 
 export default function LoginScreen() {
-  const { connectWallet } = useWallet();
+  const { connectWallet, walletAddress } = useWallet();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (walletAddress) {
+      router.push("/");
+    }
+  }, [walletAddress]);
 
   return (
     <View style={styles.container}>
