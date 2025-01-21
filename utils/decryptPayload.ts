@@ -1,5 +1,6 @@
 import nacl from "tweetnacl";
 import bs58 from "bs58";
+import { Keypair } from "@solana/web3.js";
 
 /**
  * Decrypts a payload using the provided shared secret.
@@ -34,7 +35,7 @@ export const decryptPayload = (
   }
 
   // Convert the decrypted data from Uint8Array to a string and parse it as JSON
-  const decryptedText = new TextDecoder().decode(decryptedData);
+  const decryptedText = Buffer.from(decryptedData).toString("utf8");
 
   try {
     return JSON.parse(decryptedText);
@@ -42,3 +43,8 @@ export const decryptPayload = (
     throw new Error("Failed to parse decrypted payload as JSON");
   }
 };
+
+export function getKeypairFromBase58(base58SecretKey: string): Keypair {
+  const secretKey = bs58.decode(base58SecretKey); // Decode the base58 string to a Uint8Array
+  return Keypair.fromSecretKey(secretKey); // Create a Keypair from the Uint8Array
+}

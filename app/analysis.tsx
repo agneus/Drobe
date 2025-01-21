@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  Image,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useAnalysis } from "@/context/AnalysisContext";
@@ -63,11 +64,13 @@ export default function AnalysisScreen() {
 
       // Use signAndSendTransaction to save the data
       await signAndSendTransaction(
-        transaction,
+        transaction
+        /*
         JSON.stringify({
           gender: analysisResult.gender,
           fitRating: analysisResult.fitRating,
         })
+        */
       );
 
       Alert.alert("Success", "Analysis data saved to blockchain!");
@@ -93,9 +96,11 @@ export default function AnalysisScreen() {
       {photo && (
         <View style={styles.photoContainer}>
           <Text style={styles.photoLabel}>Photo:</Text>
-          <View style={styles.photo}>
-            {/* The photo can be displayed here */}
-          </View>
+          <Image
+            source={{ uri: photo }}
+            style={styles.photo}
+            resizeMode="contain"
+          />
         </View>
       )}
 

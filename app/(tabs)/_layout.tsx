@@ -1,12 +1,11 @@
 import { Tabs } from "expo-router";
 import { useWallet } from "@/context/WalletContext";
 import { Redirect } from "expo-router";
-import { Ionicons } from "@expo/vector-icons"; // Import icons
+import { Ionicons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   const { walletAddress } = useWallet();
 
-  // Redirect to login if wallet is not connected
   if (!walletAddress) {
     return <Redirect href="/login" />;
   }
@@ -35,6 +34,15 @@ export default function TabLayout() {
           tabBarLabel: "History",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="time-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="airdrop"
+        options={{
+          tabBarLabel: "Airdrop",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="gift-outline" size={size} color={color} />
           ),
         }}
       />

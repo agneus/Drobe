@@ -107,7 +107,9 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         sharedSecret!
       );
       console.log("Transaction submitted:", signAndSendTransactionData);
-      alert(`Transaction Signature: ${signAndSendTransactionData.signature}`);
+      alert(
+        `Success! Transaction Signature: ${signAndSendTransactionData.signature}`
+      );
     }
   }, [deepLink]);
 
@@ -115,7 +117,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     const params = new URLSearchParams({
       dapp_encryption_public_key: bs58.encode(dappKeyPair.publicKey),
       cluster: "devnet",
-      app_url: "https://mnemonic-master.vercel.app/",
+      app_url: "https://agneus.github.io/drobe-page/",
       redirect_link: onConnectRedirectLink,
     });
 

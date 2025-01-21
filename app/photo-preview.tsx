@@ -5,10 +5,12 @@ import { useRouter } from "expo-router";
 import { usePhoto } from "@/context/PhotoContext";
 import { useAnalysis } from "@/context/AnalysisContext";
 import { analyzePhoto } from "@/services/aiService";
+import { useWallet } from "@/context/WalletContext";
 
 export default function PhotoPreviewScreen() {
   const { photo, clearPhoto } = usePhoto();
   const { setAnalysisResult } = useAnalysis();
+  //const { transferTokensToTreasury } = useWallet();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 

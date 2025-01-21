@@ -2,6 +2,8 @@ import { Stack } from "expo-router";
 import { WalletProvider } from "@/context/WalletContext";
 import { PhotoProvider } from "@/context/PhotoContext";
 import { AnalysisProvider } from "@/context/AnalysisContext";
+import { Buffer } from "buffer";
+global.Buffer = global.Buffer || Buffer;
 
 export default function RootLayout() {
   return (
