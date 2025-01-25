@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { useWallet } from "@/context/WalletContext";
 
@@ -25,47 +31,10 @@ export default function HistoryPage() {
         limit: 10,
       });
 
-      const transactionDetails = await Promise.all(
-        signatures.map(async (signatureInfo) => {
-          const transaction = await connection.getTransaction(
-            signatureInfo.signature
-          );
-
-          let memoData = null;
-          if (transaction) {
-            const { accountKeys, instructions } =
-              transaction.transaction.message;
-
-            instructions.forEach((instruction) => {
-              const programId = accountKeys[instruction.programIdIndex];
-              if (
-                programId.toString() ===
-                "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
-              ) {
-                try {
-                  console.log("Raw base64 instruction data:", instruction.data);
-
-                  const memo = Buffer.from(instruction.data, "base64").toString(
-                    "utf8"
-                  );
-
-                  console.log("Decoded memo (UTF-8):", memo);
-
-                  memoData = parseJSON(memo);
-                } catch (error) {
-                  console.error("Failed to decode or parse memo:", error);
-                }
-              }
-            });
-          }
-
-          return {
-            signature: signatureInfo.signature,
-            blockTime: signatureInfo.blockTime,
-            memoData,
-          };
-        })
-      );
+      const transactionDetails = signatures.map((signatureInfo) => ({
+        signature: signatureInfo.signature,
+        blockTime: signatureInfo.blockTime,
+      }));
 
       setTransactions(transactionDetails);
     } catch (error) {
@@ -75,32 +44,16 @@ export default function HistoryPage() {
     }
   };
 
-  const parseJSON = (data: string) => {
-    try {
-      return JSON.parse(data);
-    } catch (error) {
-      console.warn("Non-JSON memo data:", data);
-      return null;
-    }
-  };
-
   const renderTransaction = ({ item }: { item: any }) => (
     <View style={styles.transaction}>
-      <Text style={styles.signature}>Signature: {item.signature}</Text>
+      <Text style={styles.signatureLabel}>Transaction Signature:</Text>
+      <Text style={styles.signature}>{item.signature}</Text>
+      <Text style={styles.dateLabel}>Date:</Text>
       <Text style={styles.date}>
-        Date:{" "}
-        {item.blockTime ? new Date(item.blockTime * 1000).toString() : "N/A"}
+        {item.blockTime
+          ? new Date(item.blockTime * 1000).toLocaleString()
+          : "N/A"}
       </Text>
-      {item.memoData ? (
-        <>
-          <Text style={styles.metadata}>Gender: {item.memoData.gender}</Text>
-          <Text style={styles.metadata}>
-            Fit Rating: {item.memoData.fitRating}/10
-          </Text>
-        </>
-      ) : (
-        <Text style={styles.noMetadata}>No metadata available</Text>
-      )}
     </View>
   );
 
@@ -108,7 +61,7 @@ export default function HistoryPage() {
     return (
       <View style={styles.container}>
         <Text style={styles.message}>
-          Please connect your wallet to view history.
+          Please connect your wallet to view transaction history.
         </Text>
       </View>
     );
@@ -117,6 +70,7 @@ export default function HistoryPage() {
   if (loading) {
     return (
       <View style={styles.container}>
+        <ActivityIndicator size="large" color="#007AFF" />
         <Text style={styles.message}>Loading transactions...</Text>
       </View>
     );
@@ -127,7 +81,7 @@ export default function HistoryPage() {
       data={transactions}
       keyExtractor={(item) => item.signature}
       renderItem={renderTransaction}
-      contentContainerStyle={styles.container}
+      contentContainerStyle={styles.listContainer}
     />
   );
 }
@@ -135,38 +89,50 @@ export default function HistoryPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#25292e",
+    backgroundColor: "#1C1C1E",
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
   },
+  listContainer: {
+    padding: 20,
+    backgroundColor: "#1C1C1E",
+  },
   message: {
-    color: "#fff",
+    color: "#E5E5E5",
+    fontSize: 16,
     textAlign: "center",
     marginTop: 20,
-    fontSize: 16,
   },
   transaction: {
-    backgroundColor: "#1e1e2e",
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 5,
+    backgroundColor: "#2C2C2E",
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 15,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  signatureLabel: {
+    color: "#8E8E93",
+    fontSize: 12,
+    marginBottom: 2,
   },
   signature: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontSize: 14,
+    fontWeight: "600",
+    marginBottom: 10,
+  },
+  dateLabel: {
+    color: "#8E8E93",
+    fontSize: 12,
+    marginBottom: 2,
   },
   date: {
-    color: "#aaa",
-    fontSize: 12,
-  },
-  metadata: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontSize: 14,
-    marginTop: 5,
-  },
-  noMetadata: {
-    color: "#aaa",
-    fontSize: 14,
-    marginTop: 5,
-    fontStyle: "italic",
   },
 });

@@ -14,17 +14,31 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: "#25292e" },
-        tabBarActiveTintColor: "#1E90FF",
-        tabBarInactiveTintColor: "#fff",
+        tabBarStyle: {
+          backgroundColor: "#0D0D0F", // Super dark shade for high contrast
+          borderTopWidth: 0,
+          paddingTop: 0,
+          paddingBottom: 4, // Reduced bottom padding for balance
+          height: 60,
+        },
+        tabBarActiveTintColor: "#1E90FF", // Vibrant blue for active items
+        tabBarInactiveTintColor: "#A5A5A5", // Softer gray for inactive items
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: "600",
+          marginBottom: 4,
+        },
+        tabBarIconStyle: {
+          marginTop: 4,
+        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "Camera",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
+            <Ionicons name="camera-outline" size={size} color={color} />
           ),
         }}
       />

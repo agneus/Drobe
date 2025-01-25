@@ -28,6 +28,7 @@ export async function analyzePhoto(photoUri: string): Promise<any> {
     4. Style Recommendations:
        - Offer detailed suggestions on how the person could improve the outfit.
        - Be practical and specific (e.g., "swap the shoes for a neutral color," "add a fitted blazer to elevate the look").
+       - Should be in plain text, not markdown.
   
     Respond in JSON format with the following structure:
     {

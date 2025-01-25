@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, StyleSheet } from "react-native";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 import CircularButton from "@/components/CircularButton";
 import PermissionScreen from "@/components/PermissionScreen";
@@ -12,8 +12,6 @@ export default function CameraScreen() {
   const cameraRef = useRef<CameraView>(null);
   const { setPhoto } = usePhoto();
   const router = useRouter();
-
-  const screenHeight = Dimensions.get("window").height;
 
   if (!permission) {
     return <View />;
@@ -38,22 +36,9 @@ export default function CameraScreen() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#25292e" }}>
-      <CameraView
-        style={{ height: screenHeight * 0.8, width: "100%" }}
-        facing={facing}
-        ref={cameraRef}
-      />
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          justifyContent: "space-around",
-          alignItems: "center",
-          backgroundColor: "#1c1c1c",
-          paddingVertical: 20,
-        }}
-      >
+    <View style={styles.container}>
+      <CameraView style={styles.cameraView} facing={facing} ref={cameraRef} />
+      <View style={styles.buttonContainer}>
         <CircularButton
           icon="camera-reverse-outline"
           onPress={toggleCameraType}
@@ -69,3 +54,21 @@ export default function CameraScreen() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#0D0D0F",
+  },
+  cameraView: {
+    flex: 1,
+    width: "100%",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    backgroundColor: "#1C1C1E",
+    paddingVertical: 15,
+  },
+});

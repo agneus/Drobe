@@ -1,6 +1,12 @@
 import React, { useState } from "react";
-import { View, ActivityIndicator, Alert, StyleSheet } from "react-native";
-import PhotoPreview from "@/components/PhotoPreview";
+import {
+  View,
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Image,
+} from "react-native";
+import CircularButton from "@/components/CircularButton";
 import { useRouter } from "expo-router";
 import { usePhoto } from "@/context/PhotoContext";
 import { useAnalysis } from "@/context/AnalysisContext";
@@ -19,7 +25,6 @@ import {
   getOrCreateAssociatedTokenAccount,
   TOKEN_2022_PROGRAM_ID,
   ASSOCIATED_TOKEN_PROGRAM_ID,
-  transfer,
 } from "@solana/spl-token";
 import { DAPP_TREASURY_SECRET_KEY } from "@/env/variables";
 import { getKeypairFromBase58 } from "@/utils/decryptPayload";
@@ -148,11 +153,20 @@ export default function PhotoPreviewScreen() {
 
   return (
     <View style={styles.container}>
-      <PhotoPreview
-        photoUri={photo}
-        onCancel={handleCancel}
-        onSubmit={handleSubmit}
-      />
+      <Image source={{ uri: photo }} style={styles.photoPreview} />
+      <View style={styles.buttonContainer}>
+        <CircularButton
+          icon="close-outline"
+          onPress={handleCancel}
+          backgroundColor="#6c757d"
+        />
+        <CircularButton
+          icon="checkmark-outline"
+          onPress={handleSubmit}
+          backgroundColor="#007bff"
+          size={36}
+        />
+      </View>
       {loading && (
         <View style={styles.loading}>
           <ActivityIndicator size="large" color="#007bff" />
@@ -165,7 +179,19 @@ export default function PhotoPreviewScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#25292e",
+    backgroundColor: "#0D0D0F",
+  },
+  photoPreview: {
+    flex: 1,
+    width: "100%",
+    resizeMode: "cover",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    backgroundColor: "#1C1C1E",
+    paddingVertical: 15,
   },
   loading: {
     ...StyleSheet.absoluteFillObject,
