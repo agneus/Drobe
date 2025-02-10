@@ -43,7 +43,7 @@ git clone <repository-url>
 Start the app:
 
 ```sh
-npm start
+npx expo start
 ```
 
 Open the app:
