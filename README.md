@@ -1,5 +1,7 @@
 ## Drobe
 
+Drobe is a sophisticated mobile application built with Expo, React Native, and Solana blockchain integration. This project showcases a complex side project that leverages various modern technologies and tools to provide a seamless user experience for capturing photos, analyzing outfits, and interacting with the Solana blockchain.
+
 ## Table of Contents
 
 - [Drobe](#drobe)
