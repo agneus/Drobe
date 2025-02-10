@@ -1,50 +1,70 @@
-# Welcome to your Expo app 👋
+## Drobe
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Table of Contents
 
-## Get started
+- [Drobe](#drobe)
+- [Table of Contents](#table-of-contents)
+- [Architecture](#architecture)
+- [Technologies and Tools Used](#technologies-and-tools-used)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Features](#features)
 
-1. Install dependencies
+## Architecture
 
-   ```bash
-   npm install
-   ```
+The architecture of Drobe is designed to be modular and scalable. It consists of several key components:
 
-2. Start the app
+- **Expo Router**: Manages navigation and routing within the app.
+- **Context Providers**: Manages global state for wallet, photo, and analysis contexts.
+- **Solana Blockchain Integration**: Handles wallet connections, transactions, and token transfers using the Solana blockchain.
+- **AI Service**: Analyzes photos using Google Generative AI to provide outfit analysis and recommendations.
+- **UI Components**: Custom components for a consistent and user-friendly interface.
 
-   ```bash
-    npx expo start
-   ```
+## Technologies and Tools Used
 
-In the output, you'll find options to open the app in a
+- **React Native**: For building the mobile application.
+- **Expo**: For development, building, and deploying the app.
+- **Solana**: For blockchain integration, including wallet connections and token transactions.
+- **Google Generative AI**: For analyzing photos and providing outfit recommendations.
+- **TypeScript**: For type safety and improved developer experience.
+- **Jest**: For testing the application.
+- **Phantom Wallet**: For connecting and interacting with the Solana blockchain.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Getting Started
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Clone the repository:
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```sh
+git clone <repository-url>
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Start the app:
 
-## Learn more
+```sh
+npm start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Open the app:
+Use a development build, Android emulator, iOS simulator, or Expo Go to open the app.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Project Structure
 
-## Join the community
+The project structure is organized as follows:
 
-Join our community of developers creating universal apps.
+```
+- src/
+   - components/
+   - contexts/
+   - screens/
+   - services/
+   - utils/
+- App.tsx
+- package.json
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Features
+
+- **Photo Capture**: Capture photos using the device camera.
+- **Photo Analysis**: Analyze outfits using Google Generative AI and receive detailed feedback.
+- **Token Transactions**: Airdrop and transfer tokens on the Solana blockchain.
+- **Transaction History**: View transaction history from the connected wallet.

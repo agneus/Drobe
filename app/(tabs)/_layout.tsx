@@ -7,7 +7,7 @@ export default function TabLayout() {
   const { walletAddress } = useWallet();
 
   if (!walletAddress) {
-    return <Redirect href="/login" />;
+    //return <Redirect href="/login" />;
   }
 
   return (
